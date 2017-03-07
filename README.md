@@ -7,7 +7,7 @@ This README would normally document whatever steps are necessary to get your app
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-* [guidelines](markdown-header)
+* [guidelines](#markdown-header-markdown-header)
 
 ### Markdown Header ###
 
