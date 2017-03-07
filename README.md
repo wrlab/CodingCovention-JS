@@ -7,6 +7,7 @@ This README would normally document whatever steps are necessary to get your app
 * Quick summary
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* [guidelines](https://bitbucket.org/WRL-Interns/convention/overview#Contribution)
 
 ### How do I get set up? ###
 
