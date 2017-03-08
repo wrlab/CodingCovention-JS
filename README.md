@@ -1,7 +1,28 @@
 [원문:https://github.com/airbnb/javascript](https://github.com/airbnb/javascript)
 
 # Airbnb JavaScript 스타일 가이드() {
+| Example  | Discussion  |
+|---|---|
+| const units = 'μs';  | Best, 주석이 필요 없이 명확함  |
+| const units = '\u03bcs'; // 'μs'   | Allowed  |
+| const units = '\u03bcs'; // Greek letter mu, 's'   | Allowed  |
+| const units = '\u03bcs';  | Poor, 무슨 문자인지 알 수 없음  |
+| return '\ufeff' + content; // byte order mark  | Good, 출력 불가능한 문자 표현을 위해 이스케이프하였으며, 주석이 적절함  |
 
+1. Step 1
+2. Step 2
+3. Step 3
+   * Item 3a
+   * Item 3b
+   * Item 3c
+
+
+1. Step 1
+2. Step 2
+3. Step 3
+   1. Step 3.1
+   2. Step 3.2
+   3. Step 3.3
 
 ## 개요
 본 가이드에서는 ECMAScript6에서 추가되거나 수정된 문법을 포함하여 **JavaScript 코드 작성시 지켜야 할 코드 작성 규칙**을 정의 합니다.
