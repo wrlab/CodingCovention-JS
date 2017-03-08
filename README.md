@@ -1,7 +1,11 @@
-
 [원문:https://github.com/airbnb/javascript](https://github.com/airbnb/javascript)
 
 # Airbnb JavaScript 스타일 가이드() {
+
+
+## 개요
+본 가이드에서는 ECMAScript6에서 추가되거나 수정된 문법을 포함하여 **JavaScript 코드 작성시 지켜야 할 코드 작성 규칙**을 정의 합니다.
+
 
 *JavaScript에 대한 대부분 합리적인 접근 방법*
 
