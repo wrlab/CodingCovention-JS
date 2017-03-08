@@ -4,10 +4,11 @@ This README would normally document whatever steps are necessary to get your app
 
 ### 목차 ###
 
+* [참조](#markdown-header-_1)
+* [시작](#markdown-header-_2)
 * 참조
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-* [guidelines](#markdown-header-참조)
 
 ### 참조 ###
 
@@ -18,7 +19,7 @@ This README would normally document whatever steps are necessary to get your app
 * How to run tests
 * Deployment instructions
 
-### Contribution guidelines ###
+### 시작 ###
 
 * Writing tests
 * Code review
