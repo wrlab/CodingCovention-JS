@@ -2,14 +2,14 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+### 목차 ###
 
-* Quick summary
+* 참조
 * Version
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-* [guidelines](#markdown-header-markdown-header)
+* [guidelines](#markdown-header-참조)
 
-### Markdown Header ###
+### 참조 ###
 
 * Summary of set up
 * Configuration
