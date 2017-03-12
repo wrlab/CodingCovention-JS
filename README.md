@@ -775,4 +775,275 @@
 
         console.log(foo[0], bar[0]); // => 9, 9
 
-### 5.3
+### 5.3 Array
+  - 배열 작성에는 리터럴 구문을 사용합니다. 명시적 공간 할당을 위한 `new Array(length)`사용은 허용됩니다.
+
+        :::javascript
+        // bad
+        const items = new Array();
+
+        // good
+        const items = [];
+
+        // it's ok
+        const stocks = new Array(10);
+
+  - 배열 인덱스로 Non-Numeric 타입을 사용하지 않습니다. 대신 Map, Object를 이용할 수 있습니다.
+
+        :::javascript
+        const someStack = [];
+
+        // bad
+        someStack['abra'] = 'abracadabra';
+
+        // it's ok, but isn't recommended
+        someStack[0] = 'abracadabra';
+
+        // good
+        someStack.push('abracadabra');
+
+  - 배열의 복사, 배열 합치기에는 배열의 확장연산자 `...` 를 이용합니다.
+
+        :::javascript
+        // bad
+        const itemsCopy = Array.prototype.slice.call(items);
+
+        // good
+        const itemsCopy = [...items];
+
+        // bad
+        const allItems = itemsA.concat(itemsB);
+
+        // good
+        const allItems = [...itemsA, ...itemsB];
+
+  - array-like 오브젝트를 배열로 변환하는 경우는 Array#from을 이용할 수 있습니다.
+
+        :::javascript
+        const foo = document.querySelectorAll('.foo');
+        const nodes = Array.from(foo);
+
+### 5.4 Object
+  - 오브젝트 작성에는 리터럴 구문을 사용합니다.
+
+        :::javascript
+        // bad
+        const item = new Object();
+
+        // good
+        const item = {};
+
+  - 구조체 스타일과 사전 스타일의 key 정의를 혼용하지 않습니다.
+
+        :::javascript
+        // bad
+        {
+          a: 42, // struct-style unquoted key
+          'b': 43, // dict-style quoted key
+        }
+
+        // good
+        {
+          a: 42,
+          b: 43,
+        }
+
+        // Or...
+        {
+          'a': 42, 
+          'b': 43, 
+        }
+
+  - 동적 프로퍼티명을 갖는 오브젝트를 작성할때, 계산된 프로퍼티명(computed property names)을 이용합니다. 이 때 계산된 프로퍼티명은 사전 스타일로 취급됩니다.
+
+        :::javascript
+        function getKey(k) {
+          return a `key named ${k}`;
+        }
+
+        // bad
+        const obj = {
+          id: 5,
+          name: 'San Francisco',
+        };
+        obj[getKey('enabled')] = true;
+
+        // good
+        const obj = {
+          'id': 5,
+          'name': 'San Francisco',
+          getKey('enabled')]: true,
+        };
+
+  - 메서드 단축구문을 이용합니다.
+
+        :::javascript
+        // bad
+        const atom = {
+          value: 1,
+
+          addValue: function (value) {
+            return atom.value + value;
+          },
+        };
+
+        // good
+        const atom = {
+          value: 1,
+
+          addValue(value) {
+            return atom.value + value;
+          },
+        };
+
+  - 프로퍼티 단축구문을 이용합니다.
+
+        :::javascript
+        const lukeSkywalker = 'Luke Skywalker';
+
+        // bad
+        const obj = {
+          lukeSkywalker: lukeSkywalker,
+        };
+
+        // good
+        const obj = {
+          lukeSkywalker,
+        };
+
+  - 프로퍼티의 단축구문은 오브젝트 선언의 시작부분에 그룹화 합니다.
+
+        :::javascript
+        const anakinSkywalker = 'Anakin Skywalker';
+        const lukeSkywalker = 'Luke Skywalker';
+
+        // bad
+        const obj = {
+          episodeOne: 1,
+          twoJediWalkIntoACantina: 2,
+          lukeSkywalker,
+          episodeThree: 3,
+          mayTheFourth: 4,
+          anakinSkywalker,
+        };
+
+        // good
+        const obj = {
+          lukeSkywalker,
+          anakinSkywalker,
+          episodeOne: 1,
+          twoJediWalkIntoACantina: 2,
+          episodeThree: 3,
+          mayTheFourth: 4,
+        };
+
+### 5.5 Class
+  - 생성자는 클래스 리터럴에서 첫 번째 함수정의로 등장하여야 하며, 서브클래스에서 상위클래스의 필드에 접근을 할 때 항상 먼저 `super()`를 사용합니다.
+
+        :::javascript
+        class Vehicle {
+          constructor(color) {
+            this._color = color;
+          }
+        }
+
+        class Car extends Vehicle {
+          constructor(color) {
+            super(color);
+            this._colorCopy = this._color;
+          }
+        }
+
+  - `prototype`을 통해 필드에 접근하지 않습니다.
+
+        :::javascript
+        // bad
+        function Queue(contents = []) {
+          this._queue = [...contents];
+        }
+        Queue.prototype.pop = function() {
+          const value = this._queue[0];
+          this._queue.splice(0, 1);
+          return value;
+        }
+
+        // good
+        class Queue {
+          constructor(contents = []) {
+            this._queue = [...contents];
+          }
+          pop() {
+            const value = this._queue[0];
+            this._queue.splice(0, 1);
+            return value;
+          }
+        }
+
+  - toString()을 오버라이딩할 경우, 올바르게 동작하는지와 side effect 가 없는지 확인합니다.
+
+        :::javascript
+        class Jedi {
+          constructor(options = {}) {
+            this.name = options.name || 'no name';
+          }
+
+          getName() {
+            return this.name;
+          }
+
+          toString() {
+            return `Jedi - ${this.getName()}`;
+          }
+        }
+
+### 5.6 Function
+  - 함수식을 이용하는 경우 화살표 함수를 이용합니다. `f.bind(this)` 또는 `const self = this`의 사용을 피합니다.
+
+        :::javascript
+        // bad
+        [1, 2, 3].map(function (x) {
+          const y = x + 1;
+          return x * y;
+        });
+
+        // good
+        [1, 2, 3].map((x) => {
+          const y = x + 1;
+          return x * y;
+        });
+
+  - 함수의 본체가 하나의 식으로 구성된 경우에는 중괄호(`{}`)를 생략하고 암시적 return을 이용하는 것이 가능합니다. 그 외에는 `return` 문을 이용합니다.
+
+        :::javascript
+        // good
+        [1, 2, 3].map(number => `A string containing the ${number}.`);
+
+        // bad
+        [1, 2, 3].map(number => {
+          const nextNumber = number + 1;
+          `A string containing the ${nextNumber}.`;
+        });
+
+        // good
+        [1, 2, 3].map(number => {
+          const nextNumber = number + 1;
+          return `A string containing the ${nextNumber}.`;
+        });
+
+  - 식이 복수행에 걸쳐있을 경우는 가독성을 더욱 좋게하기 위해 소괄호로 감싸 주십시오.
+
+        :::javascript
+        // bad
+        [1, 2, 3].map(number => 'As time went by, the string containing the ' +
+          `${number} became much longer. So we needed to break it over multiple ` +
+          'lines.'
+        );
+
+        // good
+        [1, 2, 3].map(number => (
+          `As time went by, the string containing the ${number} became much ` +
+          'longer. So we needed to break it over multiple lines.'
+        ));
+
+
+### 5.7 Object
