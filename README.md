@@ -997,6 +997,15 @@
         }
 
 ### 5.6 Function
+  - 절대 새 함수를 작성하기 위해 Function constructor를 이용하지 않습니다. `eval()` 과 같은 수준의 취약점을 일으킬 수 있습니다
+
+        :::javascript
+        // bad
+        var add = new Function('a', 'b', 'return a + b');
+
+        // still bad
+        var subtract = Function('a', 'b', 'return a - b');
+
   - 함수식을 이용하는 경우 화살표 함수를 이용합니다. `f.bind(this)` 또는 `const self = this`의 사용을 피합니다.
 
         :::javascript
@@ -1065,7 +1074,7 @@
           };
         }
 
-  - 절대 파라메터에 arguments 를 지정하지 마십시오. 이것은 함수스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 확장 배열 연산자를 이용합니다.
+  - 절대 파라메터에 arguments 를 지정하지 않습니다. 이것은 함수 스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 확장 배열 연산자를 이용합니다.
 
         :::javascript
         // bad
