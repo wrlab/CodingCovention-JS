@@ -1143,5 +1143,53 @@
           // ...
         }
 
+### 5.7 String
+  - 문자열에는 더블쿼트 `""` 대신에 싱크쿼트 `''` 를 사용합니다. 문자열에 싱글쿼트가 들어간다면 문자열 템플릿을 사용하면 좋습니다.
 
-### 5.7 Object
+        :::javascript
+        // bad
+        const name = "MR. Charles didn't come";
+
+        // good
+        const name = 'MR. Charles didn\'t come';
+        const name = `MR. Charles didn't come`;
+
+  - 60문자 이상의 문자열은 문자열연결을 사용해서 복수행에 걸쳐 기술할 필요가 있습니다. 이 때 문자열 연속 기호는 사용하지 않습니다.
+
+        :::javascript
+        // bad
+        const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+
+        // bad
+        const errorMessage = 'This is a super long error that was thrown because \
+        of Batman. When you stop to think about how Batman had anything to do \
+        with this, you would get nowhere \
+        fast.';
+
+        // good
+        const errorMessage = 'This is a super long error that was thrown because ' +
+            'of Batman. When you stop to think about how Batman had anything to do ' +
+            'with this, you would get nowhere fast.';
+
+  - 프로그램에서 문자열을 생성하는 경우는 문자열 연결이 아닌 문자열 템플릿을 이용해 주십시오.
+
+        :::javascript
+        // bad
+        function sayHi(name) {
+          return 'How are you, ' + name + '?';
+        }
+
+        // bad
+        function sayHi(name) {
+          return ['How are you, ', name, '?'].join();
+        }
+
+        // good
+        function sayHi(name) {
+          return `How are you, ${name}?`;
+        }
+
+### 5.8 String
+
+
+### 5.9 String
