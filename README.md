@@ -1074,7 +1074,7 @@
           };
         }
 
-  - 절대 파라메터에 arguments 를 지정하지 않습니다. 이것은 함수 스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 확장 배열 연산자를 이용합니다.
+  - 절대 파라메터로 arguments를 사용하지 않습니다. 이것은 함수 스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 확장 배열 연산자를 이용합니다.
 
         :::javascript
         // bad
@@ -1092,5 +1092,56 @@
         function concatenateAll(name, options, ...args) {
           return args.join('');
         }
+
+  - 함수의 파라메터를 수정하는 것보다 default 파라메터를 이용합니다.
+
+        :::javascript
+        // really bad
+        function handleThings(opts) {
+          // 만약 opts가 falsy 하다면 바라는대로 비어있는 오브젝트가 설정됩니다.
+          // 하지만 미묘한 버그를 일으킬지도 모릅니다.
+          opts = opts || {};
+          // ...
+        }
+
+        // still bad
+        function handleThings(opts) {
+          if (opts === void 0) {
+            opts = {};
+          }
+          // ...
+        }
+
+        // good
+        function handleThings(opts = {}) {
+          // ...
+        }
+
+  - side effect가 있을 default 파라메터의 이용은 피합니다. 코드 해석에 혼동을 야기할 여지가 있습니다.
+    
+        :::javascript
+        var b = 1;
+        // bad
+        function count(a = b++) {
+          console.log(a);
+        }
+        count();  // 1
+        count();  // 2
+        count(3); // 3
+        count();  // 3
+
+  - 항상 default 파라메터는 뒤쪽에 두십시오.
+
+        :::javascript
+        // bad
+        function handleThings(opts = {}, name) {
+          // ...
+        }
+
+        // good
+        function handleThings(name, opts = {}) {
+          // ...
+        }
+
 
 ### 5.7 Object
