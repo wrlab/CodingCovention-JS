@@ -1030,7 +1030,7 @@
           return `A string containing the ${nextNumber}.`;
         });
 
-  - 식이 복수행에 걸쳐있을 경우는 가독성을 더욱 좋게하기 위해 소괄호로 감싸 주십시오.
+  - 식이 복수행에 걸쳐있을 경우는 가독성을 더욱 좋게하기 위해 소괄호로 감쌉니다.
 
         :::javascript
         // bad
@@ -1045,5 +1045,43 @@
           'longer. So we needed to break it over multiple lines.'
         ));
 
+  - 함수이외의 블록 (if나 while, 특히 루프문) 안에서 함수를 선언하지 마십시오. 변수에 함수를 대입하는 대신 브라우저들은 그것을 허용하지만 모두가 다르게 해석합니다.
+
+  - ECMA-262 사양에서는 block 은 statements의 일람으로 정의되어 있지만 함수선언은 statements가 아닙니다. 따라서 함수 정의문에서는 세미콜론(`;`)을 붙이지 않습니다.
+
+        :::javascript
+        // bad
+        if (currentUser) {
+          function test() {
+            console.log('Nope.');
+          }
+        }
+
+        // good
+        let test;
+        if (currentUser) {
+          test = () => {
+            console.log('Yup.');
+          };
+        }
+
+  - 절대 파라메터에 arguments 를 지정하지 마십시오. 이것은 함수스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 확장 배열 연산자를 이용합니다.
+
+        :::javascript
+        // bad
+        function nope(name, options, arguments) {
+          // ...stuff...
+        }
+
+        // bad
+        function concatenateAll(name, options) {
+          const args = Array.prototype.slice.call(arguments, 2);
+          return args.join('');
+        }
+
+        // good
+        function concatenateAll(name, options, ...args) {
+          return args.join('');
+        }
 
 ### 5.7 Object
