@@ -7,31 +7,49 @@
 
 ## 목차
 
-1. [개요](#_1)
-1. [소스 파일]()
-    1. [파일 이름]()
-    1. [파일 인코딩]()
-    1. [특수 문자]()
-1. [네이밍]()
-    1. [기본 규칙]()
-    1. [식별자 타입에 따른 규칙]()
-        1. [Object]()
-        1. [Class]()
-        1. [Property]()
-        1. [Constant]()
-        1. [Parameter]()
-1. [Code Formatting]()
-    1. [중괄호]()
-    1. [들여쓰기]()
-    1. [구문]()
-    1. [Line-wrapping]()
-    1. [공백]()
-    1. [소괄호를 이용한 그루핑]()
-    1. [콤마]()
-    1. [코멘트]()
-1. [JavaScript 코드 작성]()
-    1. [중괄호 표기]()
-    1. [블록 들여쓰기]()
+1. [개요](#markdown-header-1)
+1. [소스 파일](#markdown-header-2)
+    1. [파일 이름](#markdown-header-21)
+    1. [파일 인코딩](#markdown-header-22)
+    1. [특수 문자](#markdown-header-23)
+1. [네이밍](#markdown-header-3)
+    1. [기본 규칙](#markdown-header-31)
+    1. [식별자 타입에 따른 규칙](#markdown-header-32)
+        1. [Object](#markdown-header-321-object)
+        1. [Class](#markdown-header-322-class)
+        1. [Property](#markdown-header-323-property)
+        1. [Constant](#markdown-header-324-constant)
+        1. [Parameter](#markdown-header-325-parameter)
+1. [Code Formatting](#markdown-header-4-code-formatting)
+    1. [중괄호](#markdown-header-41)
+    1. [들여쓰기](#markdown-header-42)
+    1. [구문](#markdown-header-43)
+    1. [Line-wrapping](#markdown-header-44-line-wrapping)
+    1. [공백](#markdown-header-45)
+    1. [소괄호를 이용한 그루핑](#markdown-header-46)
+    1. [콤마](#markdown-header-47)
+1. [JavaScript 코드 작성](#markdown-header-5-javascript)
+    1. [변수 선언](#markdown-header-51)
+    1. [형](#markdown-header-52)
+    1. [Array](#markdown-header-53-array)
+    1. [Object](#markdown-header-54-object)
+    1. [Class](#markdown-header-55-class)
+    1. [Function](#markdown-header-56-function)
+    1. [String](#markdown-header-57-string)
+    1. [형변환](#markdown-header-58)
+    1. [제어 구문](#markdown-header-59)
+        1. [For loops](#markdown-header-591-for-loops)
+        1. [Error Handling](#markdown-header-592-error-handling)
+        1. [비교 연산](#markdown-header-593)
+        1. [Switch](#markdown-header-594-switch)
+    1. [코멘트](#markdown-header-510)
+    1. [Destructuring](#markdown-header-511)
+    1. [사용하면 안되는 것들](#markdown-header-512)
+        1. [with](#markdown-header-5121-with)
+        1. [eval](#markdown-header-5122-eval)
+        1. [Function](#markdown-header-5123-function)
+        1. [기본형의 래퍼 클래스에 대한 new 키워드 사용](#markdown-header-5124-new)
+
 
 ## 1 개요
   본 문서에서는 ECMAScript6에서 추가되거나 수정된 사항들을 포함하여 **JavaScript 코드 작성시 지켜야 할 코드 작성 규칙**을 정의 합니다.
@@ -54,7 +72,7 @@
         // 파일 이름
         makeStyleGuide.js
 
-  - 파일을 1개의 클래스로 export 하는 경우, PascalCase 명명규칙을 따릅니다. 파일명은 클래스명과 일치시킵니다.
+  - 파일 1개의 클래스로 export 하는 경우, PascalCase 명명규칙을 따릅니다. 파일명은 클래스명과 일치시킵니다.
 
         :::javascript
         // 파일 내용
@@ -81,9 +99,9 @@
   - 소스 파일의 문자 인코딩 방식은 **UTF-8**을 사용합니다.
 
 ### 2.3 특수 문자
-  - **공백 문자**는 오직 ASCII horizontal space character (0x20) 만을 사용합니다. 이는 **들여쓰기로 탭을 사용하지 않음**을 의미합니다. [작업 환경에서 탭을 사용하지 말라는 의미는 아닙니다.]()
+  - 공백 문자는 오직 ASCII horizontal space character (0x20) 만을 사용합니다. 이는 **들여쓰기로 탭을 사용하지 않음**을 의미합니다. [작업 환경에서 탭을 사용하지 말라는 의미는 아닙니다.](#markdown-header-42)
   - ASCII로 표현가능한 **이스케이프 문자** (`\'`, `\"`, `\\`, `\b`, `\f`, `\n`, `\r`, `\t`, `\v`) 는 숫자 기반의 이스케이프 표현 (e.g `\x0a`, `\u000a`, or `\u{a}`) 을 사용하지 않습니다.
-  - **Non-ASCII 문자**는 **유니코드 이스케이프**를 사용합니다. 이 때 주석으로 어떤 문자인지 설명을 달아줍니다.
+  - Non-ASCII 문자는 **유니코드 이스케이프**를 사용합니다. 이 때 주석으로 어떤 문자인지 설명을 달아줍니다.
 
     | Example                                            | Discussion                                                         |
     | -------------------------------------------------- | ------------------------------------------------------------------ |
@@ -129,10 +147,12 @@
 
 
 #### 3.2.2 Class
-  - Class, interface, record, typedef name은 PascalCase 명명규칙을 따릅니다.
+  - Class, interface, Package, record, typedef name은 PascalCase 명명규칙을 따릅니다.
 
         :::javascript
         // bad
+        const roundHat = require('RoundHat');
+
         function user(options) {
           this.name = options.name;
         }
@@ -142,6 +162,8 @@
         });
 
         // good
+        const RoundHat = require('RoundHat');
+
         class User {
           constructor(options) {
             this.name = options.name;
@@ -187,8 +209,8 @@
 
 ## 4 Code Formatting
 ### 4.1 중괄호
-  - 모든 제어구문(e.g. `if`, `else`, `for`, `do`, `while`, 등)에서 중괄호를 반드시 사용합니다.
-  - 중괄호 앞에는 스페이스 1개를 넣습니다.
+  - **모든 제어구문**(e.g. `if`, `else`, `for`, `do`, `while`, 등)에서 중괄호를 반드시 사용합니다.
+  - 중괄호 앞에는 **스페이스 1개**를 넣습니다.
 
         :::javascript
         // bad
@@ -211,7 +233,7 @@
         :::javascript
         if (shortCondition()) return;
 
-  - 연속 블록 구문에서 닫는 중괄호 뒤에는 개행이 아닌 스페이스 1개를 사용합니다.
+  - **연속 블록 구문**에서 닫는 중괄호 뒤에는 개행이 아닌 스페이스 1개를 사용합니다.
 
         :::javascript
         // bad
@@ -263,7 +285,7 @@
 
         }
 
-  - 비어있지 않는 블록은 Kernighan and Ritchie style을 사용합니다.
+  - 비어있지 않는 블록은 **Kernighan and Ritchie style**을 사용합니다.
       - 여는 중괄호 앞에는 개행을 하지 않습니다
       - 여는 중괄호 뒤에는 개행을 합니다
       - 닫는 중괄호 앞에는 개행을 합니다
@@ -286,7 +308,7 @@
             }
 
 
-  - 비어있는 블록은 중괄호 사이에 어떠한 공백도 넣지 않으며(e.g. `{}`), 여는 블록의 앞과 뒤, 닫는 불록의 앞에는 개행을 하지 않습니다. 다만 연속 블록 구문의 경우는 예외로 비어있지 않는 규칙을 따릅니다.
+  - 비어있는 블록은 중괄호 사이에 어떠한 공백도 넣지 않으며, 여는 블록의 앞과 뒤, 닫는 불록의 앞에는 개행을 하지 않습니다(e.g. `{}`). 다만 연속 블록 구문의 경우는 예외로 비어있지 않는 규칙을 따릅니다.
 
         :::javascript
         // bad
@@ -317,8 +339,8 @@
 
 
 ### 4.2 들여쓰기
-  - 들여쓰기로 스페이스 2개를 사용합니다.
-  - 저장소에 업로드 하기 전엔 선호하는 방법을 사용해도 좋습니다. 탭을 사용해도 괜찮음을 의미합니다.
+  - 들여쓰기로 **스페이스 2개**를 사용합니다.
+  - 저장소에 업로드 하기 전엔 선호하는 방법을 사용해도 좋습니다. **탭을 사용해도 괜찮음**을 의미합니다.
   - 다만 저장소에 업로드할 시엔 꼭 들여쓰기로 스페이스 2개를 사용하세요.
 
 ### 4.3 구문
@@ -341,8 +363,8 @@
 
 
 ### 4.4 Line-wrapping
-  - 문법적 수준에 따라 개행 및 들여쓰기를 합니다.
-  - 이 때 들여쓰기는 스페이스 4개를 사용합니다.
+  - **문법적 수준**에 따라 개행 및 들여쓰기를 합니다.
+  - 이 때 들여쓰기는 **스페이스 4개**를 사용합니다.
 
         :::javascript
         // bad
@@ -355,7 +377,7 @@
                 firstArg,
                 1 + someLongFunctionName());
 
-  - 메서드 체이닝의 경우 작업 chunk 단위로 점(`.`) 앞에서 개행 및 들여쓰기를 합니다.
+  - 메서드 체이닝의 경우 **작업 chunk 단위**로 점(`.`) 앞에서 개행 및 들여쓰기를 합니다.
 
         :::javascript
         // bad
@@ -588,104 +610,10 @@
           'Superman',
         ];
 
-### 4.8 코멘트
-  - 단일행 코멘트에는 `//` 을 사용해 주십시오. 코멘트를 추가하고 싶은 코드의 상부에 배치해 주십시오. 또한, 코멘트의 앞에 빈행을 넣습니다.
-
-        :::javascript
-        // bad
-        const active = true;  // is current tab
-
-        // good
-        // is current tab
-        const active = true;
-
-        // bad
-        function getType() {
-          console.log('fetching type...');
-          // set the default type to 'no type'
-          const type = this._type || 'no type';
-
-          return type;
-        }
-
-        // good
-        function getType() {
-          console.log('fetching type...');
-
-          // set the default type to 'no type'
-          const type = this._type || 'no type';
-
-          return type;
-        }
-
-        // also good
-        function getType() {
-          // set the default type to 'no type'
-          const type = this._type || 'no type';
-
-          return type;
-        }
-
-  - 복수행의 코멘트는 `/** ... */` 을 사용해 주십시오.
-  - 모든 클래스, 메서드, 필드에는 [JSDoc 3 형식](http://usejsdoc.org/)의 설명을 답니다.
-
-        :::javascript
-        // bad
-        // make() returns a new element
-        // based on the passed in tag name
-        //
-        // @param {String} tag
-        // @return {Element} element
-        function make(tag) {
-
-          // ...stuff...
-
-          return element;
-        }
-
-        // good
-        /**
-         * make() returns a new element
-         * based on the passed in tag name
-         *
-         * @param {String} tag
-         * @return {Element} element
-         */
-        function make(tag) {
-
-          // ...stuff...
-
-          return element;
-        }
-
-  - 문제에 대한 주석으로써 `// FIXME:` 를 사용합니다.
-
-        :::javascript
-        class Calculator extends Abacus {
-          constructor() {
-            super();
-
-            // FIXME: 글로벌변수를 사용해서는 안됨.
-            total = 0;
-          }
-        }
-
-  - 문제의 해결책에 대한 주석으로 `// TODO:` 를 사용합니다.
-
-        :::javascript
-        class Calculator extends Abacus {
-          constructor() {
-            super();
-
-            // TODO: total 은 옵션 파라메터로 설정해야함.
-            this.total = 0;
-          }
-        }
-
 ## 5 JavaScript 코드 작성
 ### 5.1 변수 선언
-  - 모든 변수 선언에는 `const`와 `let`키워드를 사용합니다. 재할당이 필요한 변수가 아니라면 기본적으로 `const`를 사용합니다.
-  - 하나의 변수 선언에는 하나의 `const`키워드를 사용합니다.
+  - **모든 변수 선언**에는 `const`와 `let`키워드를 사용합니다. 재할당이 필요한 변수가 아니라면 기본적으로 `const`를 사용합니다.
+  - **하나의 변수 선언**에는 하나의 `const`키워드를 사용합니다.
 
         :::javascript
         // bad
@@ -755,7 +683,7 @@
         let length;
 
 ### 5.2 형
-  - Primitives: primitive type은 그 값을 직접 조작합니다: `string`, `number`, `Boolean`, `null`, `undefined`
+  - 기본형: 기본형은 그 값을 직접 조작합니다: `string`, `number`, `Boolean`, `null`, `undefined`
 
         :::javascript
         const foo = 1;
@@ -776,7 +704,7 @@
         console.log(foo[0], bar[0]); // => 9, 9
 
 ### 5.3 Array
-  - 배열 작성에는 리터럴 구문을 사용합니다. 명시적 공간 할당을 위한 `new Array(length)`사용은 허용됩니다.
+  - 배열 작성에는 **리터럴 구문**을 사용합니다. 명시적 공간 할당을 위한 `new Array(length)`사용은 허용됩니다.
 
         :::javascript
         // bad
@@ -788,7 +716,7 @@
         // it's ok
         const stocks = new Array(10);
 
-  - 배열 인덱스로 Non-Numeric 타입을 사용하지 않습니다. 대신 Map, Object를 이용할 수 있습니다.
+  - 배열 인덱스로 **Non-Numeric 타입**을 사용하지 않습니다. 대신 Map, Object를 이용할 수 있습니다.
 
         :::javascript
         const someStack = [];
@@ -824,7 +752,7 @@
         const nodes = Array.from(foo);
 
 ### 5.4 Object
-  - 오브젝트 작성에는 리터럴 구문을 사용합니다.
+  - 오브젝트 작성에는 **리터럴 구문**을 사용합니다.
 
         :::javascript
         // bad
@@ -833,7 +761,7 @@
         // good
         const item = {};
 
-  - 구조체 스타일과 사전 스타일의 key 정의를 혼용하지 않습니다.
+  - **구조체 스타일**과 **사전 스타일**의 key 정의를 혼용하지 않습니다.
 
         :::javascript
         // bad
@@ -979,7 +907,7 @@
           }
         }
 
-  - toString()을 오버라이딩할 경우, 올바르게 동작하는지와 side effect 가 없는지 확인합니다.
+  - toString()을 오버라이딩은 허용하지만, 올바르게 동작하는지와 side effect 가 없는지 확인합니다.
 
         :::javascript
         class Jedi {
@@ -1006,7 +934,7 @@
         // still bad
         var subtract = Function('a', 'b', 'return a - b');
 
-  - 함수식을 이용하는 경우 화살표 함수를 이용합니다. `f.bind(this)` 또는 `const self = this`의 사용을 피합니다.
+  - 함수식을 이용하는 경우 **화살표 함수**를 이용합니다. `f.bind(this)` 또는 `const self = this`의 사용을 피합니다.
 
         :::javascript
         // bad
@@ -1054,9 +982,9 @@
           'longer. So we needed to break it over multiple lines.'
         ));
 
-  - 함수이외의 블록 (if나 while, 특히 루프문) 안에서 함수를 선언하지 마십시오. 변수에 함수를 대입하는 대신 브라우저들은 그것을 허용하지만 모두가 다르게 해석합니다.
+  - **함수이외의 블록 (if나 while, 특히 루프문)** 안에서 함수를 선언하지 마십시오. 변수에 함수를 대입하는 대신 브라우저들은 그것을 허용하지만 모두가 다르게 해석합니다.
 
-  - ECMA-262 사양에서는 block 은 statements의 일람으로 정의되어 있지만 함수선언은 statements가 아닙니다. 따라서 함수 정의문에서는 세미콜론(`;`)을 붙이지 않습니다.
+  - ECMA-262 사양에서는 block 은 statements의 일람으로 정의되어 있지만 **함수선언은 statements가 아닙니다.** 따라서 함수 정의문에서는 세미콜론(`;`)을 붙이지 않습니다.
 
         :::javascript
         // bad
@@ -1074,7 +1002,7 @@
           };
         }
 
-  - 절대 파라메터로 arguments를 사용하지 않습니다. 이것은 함수 스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 확장 배열 연산자를 이용합니다.
+  - 절대 파라메터로 `arguments`를 사용하지 않습니다. 이것은 함수 스코프에 전해지는 arguments 오브젝트의 참조를 덮어써 버립니다. 대신에 **확장 배열 연산자**를 이용합니다.
 
         :::javascript
         // bad
@@ -1144,7 +1072,7 @@
         }
 
 ### 5.7 String
-  - 문자열에는 더블쿼트 `""` 대신에 싱크쿼트 `''` 를 사용합니다. 문자열에 싱글쿼트가 들어간다면 문자열 템플릿을 사용하면 좋습니다.
+  - 문자열에는 더블쿼트 `""` 대신에 싱크쿼트 `''` 를 사용합니다. 문자열에 싱글쿼트가 들어간다면 **문자열 템플릿**을 사용하면 좋습니다.
 
         :::javascript
         // bad
@@ -1154,7 +1082,7 @@
         const name = 'MR. Charles didn\'t come';
         const name = `MR. Charles didn't come`;
 
-  - 60문자 이상의 문자열은 문자열연결을 사용해서 복수행에 걸쳐 기술할 필요가 있습니다. 이 때 문자열 연속 기호는 사용하지 않습니다.
+  - **60문자 이상의 문자열**은 문자열연결을 사용해서 복수행에 걸쳐 기술할 필요가 있습니다. 이 때 문자열 연속 기호는 사용하지 않습니다.
 
         :::javascript
         // bad
@@ -1189,7 +1117,287 @@
           return `How are you, ${name}?`;
         }
 
-### 5.8 String
+### 5.8 형변환
+  - 필요한 경우 문의 선두에서 형변환을 시도합니다.
+  - 문자열의 경우
 
+        :::javascript
+        // bad
+        const totalScore = this.reviewScore + '';
 
-### 5.9 String
+        // good
+        const totalScore = String(this.reviewScore);
+
+  - 수치의 경우, 항상 `parseInt()` 또는 `parseFloat()`을 사용하고 형변환을 위한 기수를 전달합니다.
+
+        :::javascript
+        const inputValue = '4';
+
+        // bad
+        const val = new Number(inputValue);
+
+        // bad
+        const val = +inputValue;
+
+        // bad
+        const val = inputValue >> 0;
+
+        // bad
+        const val = parseInt(inputValue);
+
+        // good
+        const val = Number(inputValue);
+
+        // good
+        const val = parseInt(inputValue, 10);
+
+  - 무언가의 이유로 인해 parseInt 가 bottleneck 이 되어 성능적인 이유로 Bitshift를 사용할 필요가 있는 경우 하려고 하는 경우, 그 이유와 무엇을 shift하는지 코멘트로 달아놓습니다.
+
+        :::javascript
+        // good
+        /**
+         * parseInt 가 원인으로 느렸음.
+         * Bitshift를 통한 수치로의 문자열 강제 형변환으로
+         * 성능을 개선시킴.
+         */
+        const val = inputValue >> 0;
+
+  - 부울의 경우
+
+        :::javascript
+        const age = 0;
+
+        // bad
+        const hasAge = new Boolean(age);
+
+        // good
+        const hasAge = Boolean(age);
+
+        // good
+        const hasAge = !!age;
+
+### 5.9 제어 구문
+#### 5.9.1 For loops
+  - 가능한 한 `for-of` 루프 대신에 `map()` 과 `reduce()` 와 같은 JavaScript **고급함수(higher-order functions)**를 이용합니다. 고급함수는 immutable(불변)룰을 적용하므로 side effect에 대해 추측하는 것보다 값을 반환하는 순수 함수를 다루는게 간단합니다.
+
+        :::javascript
+        const numbers = [1, 2, 3, 4, 5];
+
+        // bad
+        let sum = 0;
+        for (let num of numbers) {
+          sum += num;
+        }
+
+        sum === 15;
+
+        // good
+        let sum = 0;
+        numbers.forEach((num) => sum += num);
+        sum === 15;
+
+        // best (use the functional force)
+        const sum = numbers.reduce((total, num) => total + num, 0);
+        sum === 15;
+
+#### 5.9.2 Error Handling
+  - 항상 `Error` 또는 그 서브 클래스를 반환해야 합니다. 절대로 스트링 리터럴이나 `Error` 외의 다른 객체를 `throw`하지 마십시오.
+
+        :::javascript
+        // bad
+        if (err) {
+          throw `error! ${err}`;
+        }
+
+        // good
+        if (err) {
+          throw new Error(`error! ${err}`);
+        }
+
+#### 5.9.3 비교 연산
+  - `==` 이나 `!=` 대신에 `===` 와 `!==` 을 사용합니다.        
+  - 단축형을 사용합니다.
+
+        :::javascript
+        // bad
+        if (name !== '') {
+          // ...stuff...
+        }
+
+        // good
+        if (name) {
+          // ...stuff...
+        }
+
+        // bad
+        if (collection.length > 0) {
+          // ...stuff...
+        }
+
+        // good
+        if (collection.length) {
+          // ...stuff...
+        }
+
+#### 5.9.4 Switch
+  - Switch 블럭에서 어느 구문에서든 Switch 블럭을 탈출하지 않고 다음 구문으로 넘어갈 수 있습니다. 이 때 어떤 식으로든 **다른사람이 이 사실을 놓치지 않게 해야 합니다.** 코멘트를 사용합니다.
+
+        :::javascript
+        switch (input) {
+          case 1:
+          case 2:
+            prepareOneOrTwo();
+            // fall through
+          case 3:
+            handleOneTwoOrThree();
+            break;
+          default:
+            handleLargeNumber(input);
+        }
+
+### 5.10 코멘트
+  - 단일행 코멘트에는 `//` 을 사용해 주십시오. 코멘트를 추가하고 싶은 코드의 상부에 배치해 주십시오. 또한, 코멘트의 앞에 빈행을 넣습니다.
+
+        :::javascript
+        // bad
+        const active = true;  // is current tab
+
+        // good
+        // is current tab
+        const active = true;
+
+        // bad
+        function getType() {
+          console.log('fetching type...');
+          // set the default type to 'no type'
+          const type = this._type || 'no type';
+
+          return type;
+        }
+
+        // good
+        function getType() {
+          console.log('fetching type...');
+
+          // set the default type to 'no type'
+          const type = this._type || 'no type';
+
+          return type;
+        }
+
+        // also good
+        function getType() {
+          // set the default type to 'no type'
+          const type = this._type || 'no type';
+
+          return type;
+        }
+
+  - 복수행의 코멘트는 `/** ... */` 을 사용해 주십시오.
+  - 모든 클래스, 메서드, 필드에는 [JSDoc 3 형식](http://usejsdoc.org/)의 설명을 답니다.
+
+        :::javascript
+        // bad
+        // make() returns a new element
+        // based on the passed in tag name
+        //
+        // @param {String} tag
+        // @return {Element} element
+        function make(tag) {
+
+          // ...stuff...
+
+          return element;
+        }
+
+        // good
+        /**
+         * make() returns a new element
+         * based on the passed in tag name
+         *
+         * @param {String} tag
+         * @return {Element} element
+         */
+        function make(tag) {
+
+          // ...stuff...
+
+          return element;
+        }
+
+  - 문제에 대한 주석으로써 `// FIXME:` 를 사용합니다.
+
+        :::javascript
+        class Calculator extends Abacus {
+          constructor() {
+            super();
+
+            // FIXME: 글로벌변수를 사용해서는 안됨.
+            total = 0;
+          }
+        }
+
+  - 문제의 해결책에 대한 주석으로 `// TODO:` 를 사용합니다.
+
+        :::javascript
+        class Calculator extends Abacus {
+          constructor() {
+            super();
+
+            // TODO: total 은 옵션 파라메터로 설정해야함.
+            this.total = 0;
+          }
+        }
+
+### 5.11 Destructuring
+  - 배열의 Destructuring을 이용합니다.
+
+        :::javascript
+        const arr = [1, 2, 3, 4];
+
+        // bad
+        const first = arr[0];
+        const second = arr[1];
+
+        // good
+        const [first, second] = arr;
+
+  - 복수의 값을 반환하는 경우는 배열의 Destructuring이 아닌 오브젝트의 Destructuring을 이용합니다.
+
+        :::javascript
+        // bad
+        function processInput(input) {
+          return [left, right, top, bottom];
+        }
+
+        // 호출처에서 반환된 데이터의 순서를 고려해야 합니다.
+        const [left, __, top] = processInput(input);
+
+        // good
+        function processInput(input) {
+          return { left, right, top, bottom };
+        }
+
+        // 호출처에서는 필요한 데이터만 선택하면 됩니다.
+        const { left, right } = processInput(input);
+
+### 5.12 사용하면 안되는 것들
+#### 5.12.1 with
+  - with 키워드는 코드를 이해하기 어렵게 만듭니다.
+
+#### 5.12.2 eval
+  - **"eval is evil"** - Douglas Crockford
+
+#### 5.12.3 Function
+  - Function 키워드를 이용한 동적 해석은 eval과 마찬가지로 코드에 많은 취약점과 성능 저하를 야기합니다.
+
+#### 5.12.4 기본형의 래퍼 클래스에 대한 new 키워드 사용
+  - 기본형에 대한 new 키워드 사용은 예상과 다른 결과를 반환합니다.
+
+         :::javascript
+         // bad
+         const x = new Boolean(false);
+         if (x) alert(typeof x);  // alerts 'object'
+
+         const x = Boolean(0);
+         if (!x) alert(typeof x);  // alerts 'boolean', as expected
